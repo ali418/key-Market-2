@@ -4,8 +4,10 @@ const Sequelize = require('sequelize');
 const basename = path.basename(__filename);
 const env = process.env.NODE_ENV || 'development';
 
-// Load environment variables
-require('dotenv').config({ path: path.join(__dirname, '../../../.env') });
+// Load environment variables only if DATABASE_URL is not provided by platform
+if (!process.env.DATABASE_URL) {
+  require('dotenv').config({ path: path.join(__dirname, '../../../.env') });
+}
 
 // Import database configuration
 const dbConfig = require('../config/database')[env];

@@ -1,4 +1,6 @@
-require('dotenv').config({ path: '../../.env' });
+if (!process.env.DATABASE_URL) {
+  require('dotenv').config({ path: '../../.env' });
+}
 
 // Parse DATABASE_URL for Railway deployment
 const parseDbUrl = (url) => {

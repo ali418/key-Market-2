@@ -1,4 +1,6 @@
-require('dotenv').config({ override: true });
+if (!process.env.DATABASE_URL) {
+  require('dotenv').config();
+}
 // Ensure JWT secrets exist to prevent login failures
 if (!process.env.JWT_SECRET || process.env.JWT_SECRET.includes('your_production')) {
   console.warn('JWT_SECRET missing; using temporary insecure default. Set it in Railway env.');
