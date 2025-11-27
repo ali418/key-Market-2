@@ -4,9 +4,18 @@ const Sequelize = require('sequelize');
 const basename = path.basename(__filename);
 const env = process.env.NODE_ENV || 'development';
 
-// Load environment variables only if DATABASE_URL is not provided by platform
 if (!process.env.DATABASE_URL) {
-  require('dotenv').config({ path: path.join(__dirname, '../../../.env') });
+  const fb = process.env.POSTGRES_URL || process.env.PG_CONNECTION_STRING || process.env.RAILWAY_DATABASE_URL || process.env.POSTGRESQL_URL;
+  if (fb) {
+    process.env.DATABASE_URL = fb;
+    try {
+      const t = fb;
+      const u = new URL(t);
+      console.log(`Using fallback DB URL env host=${u.hostname} db=${u.pathname.slice(1)}`);
+    } catch {}
+  } else {
+    require('dotenv').config({ path: path.join(__dirname, '../../../.env') });
+  }
 }
 
 // Import database configuration
