@@ -1,0 +1,403 @@
+/* Main CSS styles */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Professional A4 Invoice Print Styles */
+@media print {
+  /* Reset all margins and paddings for print */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* A4 Page Setup */
+  @page {
+    size: A4;
+    margin: 15mm;
+    padding: 0;
+  }
+
+  /* Hide all non-printable elements */
+  body * {
+    visibility: hidden;
+  }
+
+  /* Show only the invoice print component */
+  .invoice-print-container,
+  .invoice-print-container * {
+    visibility: visible !important;
+  }
+
+  /* Position the invoice print container */
+  .invoice-print-container {
+    position: absolute !important;
+    left: 0 !important;
+    top: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: white !important;
+    font-size: 12px !important;
+    line-height: 1.4 !important;
+  }
+
+  /* Professional Typography for Print */
+  .invoice-print-container h1,
+  .invoice-print-container h2,
+  .invoice-print-container h3,
+  .invoice-print-container h4,
+  .invoice-print-container h5,
+  .invoice-print-container h6 {
+    color: #1976d2 !important;
+    font-weight: bold !important;
+    margin-bottom: 8px !important;
+    page-break-after: avoid !important;
+  }
+
+  /* Table Styling for Print */
+  .invoice-print-container table {
+    width: 100% !important;
+    border-collapse: collapse !important;
+    margin-bottom: 15px !important;
+    page-break-inside: avoid !important;
+  }
+
+  .invoice-print-container th,
+  .invoice-print-container td {
+    border: 1px solid #ddd !important;
+    padding: 8px !important;
+    text-align: left !important;
+    font-size: 11px !important;
+    line-height: 1.3 !important;
+  }
+
+  .invoice-print-container th {
+    background-color: #1976d2 !important;
+    color: white !important;
+    font-weight: bold !important;
+  }
+
+  .invoice-print-container tbody tr:nth-child(even) {
+    background-color: #f8f9fa !important;
+  }
+
+  /* Box and Border Styling */
+  .invoice-print-container .MuiBox-root {
+    border-radius: 4px !important;
+  }
+
+  /* Ensure proper spacing */
+  .invoice-print-container .MuiGrid-container {
+    margin: 0 !important;
+    width: 100% !important;
+  }
+
+  .invoice-print-container .MuiGrid-item {
+    padding: 8px !important;
+  }
+
+  /* Color preservation for important elements */
+  .invoice-print-container .invoice-header {
+    border-bottom: 3px solid #1976d2 !important;
+  }
+
+  .invoice-print-container .invoice-total {
+    background-color: #f8f9fa !important;
+    border: 2px solid #1976d2 !important;
+  }
+
+  /* Signature lines */
+  .invoice-print-container .signature-line {
+    border-bottom: 2px solid #333 !important;
+    height: 50px !important;
+    margin-bottom: 10px !important;
+  }
+
+  /* Page break controls */
+  .invoice-print-container .page-break-before {
+    page-break-before: always !important;
+  }
+
+  .invoice-print-container .page-break-after {
+    page-break-after: always !important;
+  }
+
+  .invoice-print-container .no-page-break {
+    page-break-inside: avoid !important;
+  }
+
+  /* Hide Material-UI elevation shadows */
+  .invoice-print-container .MuiPaper-root {
+    box-shadow: none !important;
+    background: transparent !important;
+  }
+
+  /* Ensure text is black for readability */
+  .invoice-print-container p,
+  .invoice-print-container span,
+  .invoice-print-container div {
+    color: #333 !important;
+  }
+
+  /* Status colors for print */
+  .invoice-print-container .status-paid {
+    color: #28a745 !important;
+  }
+
+  .invoice-print-container .status-pending {
+    color: #ffc107 !important;
+  }
+
+  .invoice-print-container .status-overdue {
+    color: #dc3545 !important;
+  }
+
+  /* Professional footer */
+  .invoice-print-container .invoice-footer {
+    position: fixed !important;
+    bottom: 10mm !important;
+    left: 0 !important;
+    right: 0 !important;
+    text-align: center !important;
+    font-size: 10px !important;
+    color: #666 !important;
+    border-top: 1px solid #ddd !important;
+    padding-top: 5px !important;
+  }
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+/* Override Material-UI button to use logical properties for RTL support */
+.MuiButton-root {
+  margin-inline-start: 0 !important;
+  margin-inline-end: 8px !important;
+}
+
+/* Override Material-UI Paper component for RTL support */
+.MuiPaper-root {
+  direction: inherit;
+}
+
+/* Ensure form elements respect RTL direction */
+.MuiTextField-root {
+  direction: inherit;
+}
+
+.MuiOutlinedInput-root {
+  direction: inherit;
+}
+
+/* Ensure proper spacing for buttons in RTL */
+[dir="rtl"] .MuiButton-root {
+  margin-inline-start: 8px !important;
+  margin-inline-end: 0 !important;
+}
+
+/* Specific overrides for form elements in RTL */
+[dir="rtl"] .MuiTextField-root {
+  direction: rtl;
+}
+
+[dir="rtl"] .MuiOutlinedInput-root {
+  direction: rtl;
+}
+
+/* Ensure select dropdowns respect RTL direction */
+[dir="rtl"] .MuiSelect-root {
+  direction: rtl;
+}
+
+/* Proper alignment for RTL text */
+[dir="rtl"] .MuiTypography-root {
+  text-align: inherit;
+}
+
+/* Ensure inputs and labels are properly aligned in RTL */
+[dir="rtl"] .MuiInputLabel-root {
+  transform-origin: top right;
+  right: 14px;
+  left: auto;
+}
+
+/* Ensure proper icon positioning in RTL */
+[dir="rtl"] .MuiInputAdornment-positionStart {
+  margin-left: 8px;
+  margin-right: -12px;
+}
+
+[dir="rtl"] .MuiInputAdornment-positionEnd {
+  margin-right: 8px;
+  margin-left: -12px;
+}
+
+/* Main layout container styling - FIXED: no forced direction */
+body, html, #root {
+  height: 100%;
+  overflow-x: hidden;
+  /* Let document.dir manage direction dynamically through i18n/LanguageSwitcher */
+}
+
+[dir="rtl"] .MuiListItemIcon-root {
+  /* Proper spacing for list item icons in RTL */
+  margin-left: 16px;
+  margin-right: 0;
+}
+
+/* NOTE: Sidebar state classes have been removed because CSS Grid now handles all layout spacing */
+
+/* RTL-specific spacing for price and counts in list secondaryAction */
+[dir="rtl"] .price-wrapper {
+  margin-right: -140px; /* gap between price and icon on RTL */
+  margin-left: 0;     /* avoid pushing price into the card edge */
+}
+
+/* مخصص للطباعة */ 
+@media print { 
+  /* أخفِ كل شيء بصرياً ولكن اترك التخطيط ثم أظهر الإيصال فقط */
+  body * {
+    visibility: hidden !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  #receipt-print, #receipt-print * {
+    visibility: visible !important;
+    position: relative;
+  }
+
+  /* أخفِ إطار الحوار وأزراره أثناء الطباعة حتى لا تسبق الإيصال */
+  .MuiDialog-root, .MuiDialog-container, .MuiDialog-paper, .MuiDialogActions-root {
+    visibility: hidden !important;
+  }
+  .MuiDialogContent-root #receipt-print, .MuiDialogContent-root #receipt-print * {
+    visibility: visible !important;
+  }
+
+  /* تأكد من خلفية بيضاء */
+  html, body {
+    width: 100% !important;
+    background: #fff !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+
+  @page { 
+    size: 80mm 130mm;       /* العرض 80mm والطول تلقائي */ 
+    margin: 0;             /* بدون هوامش */ 
+    padding: 0;
+  } 
+
+  body { 
+    margin: 0 !important; 
+    padding: 0 !important; 
+  } 
+
+  #receipt-print { 
+    width: 80mm;           /* عرض الورق المناسب للإيصال */ 
+    margin: 0 !important;  /* إزالة الهوامش تماماً */
+    padding: 0;            /* إزالة المسافة الداخلية */ 
+    font-size: 14px;       /* خط مناسب */ 
+    line-height: 1.4;
+    background: #fff !important;
+    color: #000 !important;
+    border: none !important;
+    box-shadow: none !important;
+    height: auto !important;
+    max-height: none !important;
+    min-height: 100% !important;
+    overflow: visible !important;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    transform: translateY(0) !important;
+  } 
+
+  /* منع كسر الفاتورة على صفحات */ 
+  #receipt-print, 
+  #receipt-print * { 
+    page-break-inside: avoid !important; 
+    break-inside: avoid !important; 
+    page-break-before: avoid !important;
+    page-break-after: avoid !important;
+    break-before: avoid !important;
+    break-after: avoid !important;
+  }
+
+  /* تقليل الهوامش الافتراضية لعناصر MUI داخل الإيصال أثناء الطباعة */
+  #receipt-print .MuiTypography-root {
+    margin: 0 !important;
+    padding: 0 !important;
+    line-height: 1.3 !important;
+  }
+  
+  #receipt-print .MuiDivider-root {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    border-color: #000 !important;
+  }
+  
+  #receipt-print .MuiBox-root {
+    margin-top: 1px !important;
+    margin-bottom: 1px !important;
+  }
+
+  /* تأكد من ظهور كل أقسام الإيصال */
+  #receipt-print > * {
+    display: block !important;
+    visibility: visible !important;
+    width: 100% !important;
+    overflow: visible !important;
+    page-break-inside: avoid !important;
+  }
+  
+  /* تأكد من أن الجداول تظهر بشكل صحيح */
+  #receipt-print table,
+  #receipt-print th,
+  #receipt-print td {
+    width: auto !important;
+    max-width: 80mm !important;
+    font-size: 12px !important;
+    table-layout: fixed !important;
+    white-space: normal !important;
+    word-wrap: break-word !important;
+  }
+  
+  /* تصغير حجم الخط للعناصر الكبيرة */
+  #receipt-print h1, #receipt-print h2, #receipt-print h3 {
+    font-size: 16px !important;
+    margin: 2px 0 !important;
+  }
+  
+  /* تأكد من ظهور أقسام الإجمالي ومعلومات الدفع والتذييل */
+  #receipt-print .receipt-totals,
+  #receipt-print .receipt-payment-info,
+  #receipt-print .receipt-footer {
+    display: block !important;
+    visibility: visible !important;
+    margin-top: 5px !important;
+    page-break-before: avoid !important;
+    page-break-inside: avoid !important;
+  }
+}
