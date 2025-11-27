@@ -1,4 +1,4 @@
-if (!process.env.DATABASE_URL) {
+if (process.env.NODE_ENV !== 'production' && !process.env.DATABASE_URL) {
   require('dotenv').config();
 }
 // Ensure JWT secrets exist to prevent login failures
