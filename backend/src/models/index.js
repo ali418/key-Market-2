@@ -16,8 +16,8 @@ let sequelize;
 
 // Check for DATABASE_URL (Railway provides this)
 if (process.env.DATABASE_URL) {
-  // Initialize Sequelize with connection string
-  console.log('Using DATABASE_URL for database connection');
+  const u = new URL(process.env.DATABASE_URL);
+  console.log(`Using DATABASE_URL host=${u.hostname} db=${u.pathname.slice(1)}`);
   sequelize = new Sequelize(process.env.DATABASE_URL, {
     dialect: 'postgres',
     dialectOptions: {
@@ -43,6 +43,7 @@ if (process.env.DATABASE_URL) {
       dialectOptions: dbConfig.dialectOptions
     }
   );
+  console.log(`Using explicit DB config host=${dbConfig.host} db=${dbConfig.database}`);
 }
 
 const db = {};
