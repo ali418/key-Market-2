@@ -17,6 +17,8 @@ if (!process.env.DATABASE_URL) {
     require('dotenv').config({ path: path.join(__dirname, '../../../.env') });
   }
 }
+    
+     
 
 // Import database configuration
 const dbConfig = require('../config/database')[env];
@@ -25,14 +27,23 @@ let sequelize;
 
 // Check for DATABASE_URL (Railway provides this)
 if (process.env.DATABASE_URL) {
-  const u = new URL(process.env.DATABASE_URL);
-  const host = u.hostname;
+  let rawUrl = process.env.RAILWAY_PROXY_URL || process.env.DATABASE_URL;
+  let u = new URL(rawUrl);
+  let host = u.hostname;
+  let dbName = u.pathname.slice(1) || process.env.PGDATABASE || process.env.DB_NAME || 'railway';
+  if (!u.pathname.slice(1)) {
+    const rebuilt = `${u.protocol}//${u.username}:${u.password}@${u.hostname}:${u.port}/${dbName}`;
+    process.env.DATABASE_URL = rebuilt;
+    rawUrl = rebuilt;
+    u = new URL(rebuilt);
+    host = u.hostname;
+  }
   const needSSL = !(
     host.endsWith('railway.internal') ||
     host === 'localhost' ||
     host === '127.0.0.1'
   );
-  console.log(`Using DATABASE_URL host=${host} db=${u.pathname.slice(1)} ssl=${needSSL}`);
+  console.log(`Using DATABASE_URL host=${host} db=${dbName} ssl=${needSSL}`);
   sequelize = new Sequelize(process.env.DATABASE_URL, {
     dialect: 'postgres',
     dialectOptions: needSSL ? { ssl: { require: true, rejectUnauthorized: false } } : {},
