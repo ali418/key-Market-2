@@ -18,7 +18,11 @@ let sequelize;
 if (process.env.DATABASE_URL) {
   const u = new URL(process.env.DATABASE_URL);
   const host = u.hostname;
-  const needSSL = !(host.endsWith('railway.internal') || host === 'localhost' || host === '127.0.0.1'));
+  const needSSL = !(
+    host.endsWith('railway.internal') ||
+    host === 'localhost' ||
+    host === '127.0.0.1'
+  );
   console.log(`Using DATABASE_URL host=${host} db=${u.pathname.slice(1)} ssl=${needSSL}`);
   sequelize = new Sequelize(process.env.DATABASE_URL, {
     dialect: 'postgres',
