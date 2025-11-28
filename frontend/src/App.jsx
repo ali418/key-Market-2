@@ -143,35 +143,43 @@ const App = () => {
   // Create theme based on theme mode and language
   const theme = React.useMemo(() => {
     const isRTL = currentLanguage && currentLanguage.startsWith('ar');
+    const primaryMain = process.env.REACT_APP_PRIMARY_COLOR || '#D4AF37';
+    const primaryLight = process.env.REACT_APP_PRIMARY_LIGHT || '#F4E4BC';
+    const primaryDark = process.env.REACT_APP_PRIMARY_DARK || '#B8860B';
+    const secondaryMain = process.env.REACT_APP_SECONDARY_COLOR || '#2E7D32';
+    const secondaryLight = process.env.REACT_APP_SECONDARY_LIGHT || '#4CAF50';
+    const secondaryDark = process.env.REACT_APP_SECONDARY_DARK || '#1B5E20';
+    const bgDefault = process.env.REACT_APP_BG_DEFAULT || (themeMode === 'dark' ? '#121212' : '#FAFAFA');
+    const bgPaper = process.env.REACT_APP_BG_PAPER || (themeMode === 'dark' ? '#1E1E1E' : '#FFFFFF');
     return createTheme({
       direction: isRTL ? 'rtl' : 'ltr', // RTL for Arabic, LTR for other languages
       palette: {
         mode: themeMode,
         primary: {
-          main: '#D4AF37', // Gold color as primary
-          light: '#F4E4BC',
-          dark: '#B8860B',
+          main: primaryMain,
+          light: primaryLight,
+          dark: primaryDark,
           contrastText: '#FFFFFF',
         },
         secondary: {
-          main: '#2E7D32', // Green color as secondary
-          light: '#4CAF50',
-          dark: '#1B5E20',
+          main: secondaryMain,
+          light: secondaryLight,
+          dark: secondaryDark,
           contrastText: '#FFFFFF',
         },
         background: {
-          default: themeMode === 'dark' ? '#121212' : '#FAFAFA',
-          paper: themeMode === 'dark' ? '#1E1E1E' : '#FFFFFF',
+          default: bgDefault,
+          paper: bgPaper,
         },
         success: {
-          main: '#2E7D32',
-          light: '#4CAF50',
-          dark: '#1B5E20',
+          main: secondaryMain,
+          light: secondaryLight,
+          dark: secondaryDark,
         },
         warning: {
-          main: '#D4AF37',
-          light: '#F4E4BC',
-          dark: '#B8860B',
+          main: primaryMain,
+          light: primaryLight,
+          dark: primaryDark,
         },
         info: {
           main: '#0288D1',

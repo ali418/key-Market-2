@@ -37,8 +37,8 @@ const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const theme = useTheme();
-  const bgUrl = process.env.REACT_APP_LOGIN_BG_URL || '/assets/Capture2.PNG';
-  const sideUrl = process.env.REACT_APP_LOGIN_SIDE_URL || '/assets/Capture2.PNG';
+  const bgUrl = process.env.REACT_APP_LOGIN_BG_URL || '/assets/Capture1.PNG';
+  const sideUrl = process.env.REACT_APP_LOGIN_SIDE_URL || '/assets/Capture1.PNG';
   
   const [formData, setFormData] = useState({
     username: '',
@@ -154,8 +154,8 @@ const Login = () => {
           backgroundImage: `url(${bgUrl})`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
-          filter: 'blur(4px)',
-          opacity: 0.25,
+          filter: 'blur(6px)',
+          opacity: 0.22,
           zIndex: 0,
         }}
       />
@@ -169,8 +169,8 @@ const Login = () => {
           backgroundImage: `url(${sideUrl})`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
-          opacity: 0.35,
-          filter: 'saturate(1.05) contrast(1.05)',
+          opacity: 0.4,
+          filter: 'saturate(1.1) contrast(1.1)',
           mixBlendMode: 'multiply',
           borderTopRightRadius: '20px',
           borderBottomRightRadius: '20px',
@@ -236,7 +236,7 @@ const Login = () => {
             alignItems: 'center',
             justifyContent: 'center',
             mb: 2,
-            boxShadow: '0 8px 32px rgba(212, 175, 55, 0.3)',
+            boxShadow: '0 10px 36px rgba(0,0,0,0.15)',
             position: 'relative',
             '&::before': {
               content: '""',
@@ -246,8 +246,8 @@ const Login = () => {
               right: '10px',
               bottom: '10px',
               borderRadius: '50%',
-              background: 'rgba(255, 255, 255, 0.2)',
-              border: '2px solid rgba(255, 255, 255, 0.3)',
+              background: 'rgba(255, 255, 255, 0.18)',
+              border: '2px solid rgba(255, 255, 255, 0.28)',
             }
           })}
         >
