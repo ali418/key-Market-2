@@ -36,6 +36,7 @@ const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const theme = useTheme();
+  const bgUrl = process.env.REACT_APP_LOGIN_BG_URL || '/assets/Capture1.PNG';
   
   const [formData, setFormData] = useState({
     username: '',
@@ -144,6 +145,18 @@ const Login = () => {
         }
       }}
     >
+      <Box
+        sx={{
+          position: 'absolute',
+          inset: 0,
+          backgroundImage: `url(${bgUrl})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          filter: 'blur(4px)',
+          opacity: 0.25,
+          zIndex: 0,
+        }}
+      />
       {/* Decorative Elements */}
       <Box
         sx={(theme) => ({
