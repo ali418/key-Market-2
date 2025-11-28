@@ -241,7 +241,7 @@ const Login = () => {
             mb: 1
           }}
         >
-          نسمة جمال
+          كي فورماركت
         </Typography>
         
         <Typography 
@@ -253,7 +253,7 @@ const Login = () => {
             fontFamily: '"Tajawal", "Roboto", sans-serif'
           }}
         >
-          NASMAT JAMAL
+          KEY4MARKET
         </Typography>
       </Box>
       

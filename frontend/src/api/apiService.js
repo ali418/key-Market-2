@@ -5,9 +5,7 @@ import { getToken, getRefreshToken, saveAuthData, clearAuthData } from '../servi
 axios.defaults.timeout = 15000; // 15 seconds timeout
 axios.defaults.timeoutErrorMessage = 'Server request timed out. Please try again later.';
 
-// Get API URL from environment variables with fallback
-// eslint-disable-next-line no-undef
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3002'; // Remove /api/v1 from base URL
+const API_URL = process.env.REACT_APP_API_URL || (typeof window !== 'undefined' ? `${window.location.origin}/api/v1` : 'http://localhost:3002');
 
 // Simple cache implementation with improved performance
 const apiCache = {
