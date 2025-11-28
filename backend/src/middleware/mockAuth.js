@@ -11,6 +11,11 @@ const mockAuth = async (req, res, next) => {
   // If real auth already set a user, skip
   if (req.user) return next();
 
+  // In production, do not perform any mock user setup or password resets
+  if (process.env.NODE_ENV === 'production') {
+    return next();
+  }
+
   try {
     // Try to use an existing admin user to satisfy FK constraints (include soft-deleted)
     let adminUser = await User.findOne({ where: { username: 'admin' }, paranoid: false });

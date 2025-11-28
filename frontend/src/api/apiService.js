@@ -951,7 +951,7 @@ const apiService = {
   // New: Login history for current user
   async getMyLoginHistory({ page = 1, limit = 20 } = {}) {
     try {
-      const response = await axiosInstance.get('/users/profile/login-history', { params: { page, limit } });
+      const response = await axiosInstance.get('/users/login-history', { params: { page, limit } });
       // backend returns { success, data: [], pagination }
       return response.data;
     } catch (error) {

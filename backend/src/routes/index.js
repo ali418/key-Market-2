@@ -18,8 +18,10 @@ router.get('/health', (req, res) => {
   res.status(200).json({ status: 'OK', message: 'API is running' });
 });
 
-// Attach mock auth to set a default user (development only)
-router.use(mockAuth);
+// Attach mock auth only in non-production environments
+if (process.env.NODE_ENV !== 'production') {
+  router.use(mockAuth);
+}
 
 // API routes
 router.use('/auth', authRoutes);
