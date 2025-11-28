@@ -3,36 +3,35 @@ const router = express.Router();
 const { body } = require('express-validator');
 const validateRequest = require('../middleware/validateRequest');
 const userController = require('../controllers/user.controller');
-const { protect, restrictTo } = require('../middleware/auth');
-const mockAuth = require('../middleware/mockAuth');
+const { protect } = require('../middleware/auth');
 
 /**
  * @route GET /api/v1/users
  * @desc Get all users (admin only)
  * @access Private/Admin
  */
-router.get('/', mockAuth, userController.getAllUsers);
+router.get('/', protect, userController.getAllUsers);
 
 /**
  * @route GET /api/v1/users/profile
  * @desc Get current user profile
  * @access Private
  */
-router.get('/profile', mockAuth, userController.getCurrentUser);
+router.get('/profile', protect, userController.getCurrentUser);
 
 /**
  * @route GET /api/v1/users/login-history
  * @desc Get current user's login history
  * @access Private
  */
-router.get('/login-history', mockAuth, userController.getCurrentUserLoginHistory);
+router.get('/login-history', protect, userController.getCurrentUserLoginHistory);
 
 /**
  * @route GET /api/v1/users/:id
  * @desc Get user by ID
  * @access Private
  */
-router.get('/:id', mockAuth, userController.getUserById);
+router.get('/:id', protect, userController.getUserById);
 
 /**
  * @route POST /api/v1/users
@@ -41,7 +40,7 @@ router.get('/:id', mockAuth, userController.getUserById);
  */
 router.post(
   '/',
-  mockAuth,
+  protect,
   [
     body('username').notEmpty().withMessage('Username is required'),
     body('email').isEmail().withMessage('Please provide a valid email'),
@@ -52,7 +51,7 @@ router.post(
     body('role').optional().isIn(['admin', 'manager', 'cashier', 'storekeeper', 'accountant', 'staff']).withMessage('Invalid role'),
     validateRequest,
   ],
-  userController.createUser
+  userController.createUser,
 );
 
 /**
@@ -62,14 +61,14 @@ router.post(
  */
 router.put(
   '/:id',
-  mockAuth,
+  protect,
   [
     body('username').optional().notEmpty().withMessage('Username cannot be empty'),
     body('email').optional().isEmail().withMessage('Please provide a valid email'),
     body('role').optional().isIn(['admin', 'manager', 'cashier', 'storekeeper', 'accountant', 'staff']).withMessage('Invalid role'),
     validateRequest,
   ],
-  userController.updateUser
+  userController.updateUser,
 );
 
 /**
@@ -79,7 +78,7 @@ router.put(
  */
 router.patch(
   '/:id/change-password',
-  mockAuth,
+  protect,
   [
     body('currentPassword').notEmpty().withMessage('Current password is required'),
     body('newPassword')
@@ -96,7 +95,7 @@ router.patch(
         return res.status(401).json({ success: false, message: 'User not authenticated' });
       }
 
-      const isSelf = req.user.id === id;
+      const isSelf = String(req.user.id) === String(id);
       const isAdmin = req.user.role === 'admin';
       if (!isSelf && !isAdmin) {
         return res.status(403).json({ success: false, message: 'Forbidden: You cannot change this user\'s password' });
@@ -122,10 +121,10 @@ router.patch(
         // تحسين تشفير كلمة المرور باستخدام معامل تكلفة أعلى
         const saltRounds = 12;
         const hashed = await bcrypt.hash(newPassword, saltRounds);
-        
+
         // تأكد من تحديث كلمة المرور بشكل صحيح
         await user.update({ password: hashed });
-        
+
         // تسجيل تغيير كلمة المرور في السجل
         console.log(`Password updated for user ${user.id} at ${new Date().toISOString()}`);
       } catch (error) {
@@ -137,7 +136,7 @@ router.patch(
     } catch (error) {
       next(error);
     }
-  }
+  },
 );
 
 /**
@@ -145,13 +144,13 @@ router.patch(
  * @desc Delete a user (admin only)
  * @access Private/Admin
  */
-router.delete('/:id', mockAuth, userController.deleteUser);
+router.delete('/:id', protect, userController.deleteUser);
 
 /**
  * @route GET /api/v1/users/:id/login-history
  * @desc Get login history for a specific user (admin only or self)
  * @access Private
  */
-router.get('/:id/login-history', mockAuth, userController.getUserLoginHistory);
+router.get('/:id/login-history', protect, userController.getUserLoginHistory);
 
 module.exports = router;
