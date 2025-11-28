@@ -18,12 +18,14 @@ import {
   CircularProgress,
   Alert,
 } from '@mui/material';
+import { useTheme } from '@mui/material';
 import {
   LockOutlined as LockOutlinedIcon,
   Visibility,
   VisibilityOff,
 } from '@mui/icons-material';
 import { useEffect } from 'react';
+import Logo from '../../assets/logo/logo-nasmat-jamal.svg';
 
 // Redux actions
 import { login } from '../../redux/slices/authSlice';
@@ -33,6 +35,7 @@ const Login = () => {
   const { t, i18n } = useTranslation('auth');
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const theme = useTheme();
   
   const [formData, setFormData] = useState({
     username: '',
@@ -124,7 +127,7 @@ const Login = () => {
         alignItems: 'center',
         width: '100%',
         minHeight: '500px',
-        background: 'linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%)',
+        background: `linear-gradient(135deg, ${theme.palette.background.default} 0%, ${theme.palette.background.paper} 100%)`,
         borderRadius: '20px',
         padding: '40px 20px',
         position: 'relative',
@@ -136,42 +139,42 @@ const Login = () => {
           left: 0,
           right: 0,
           bottom: 0,
-          background: 'linear-gradient(135deg, rgba(212, 175, 55, 0.1) 0%, rgba(46, 125, 50, 0.1) 100%)',
+          background: `linear-gradient(135deg, ${theme.palette.primary.main}1A 0%, ${theme.palette.secondary.main}1A 100%)`,
           borderRadius: '20px',
         }
       }}
     >
       {/* Decorative Elements */}
       <Box
-        sx={{
+        sx={(theme) => ({
           position: 'absolute',
           top: '20px',
           right: '20px',
           width: '60px',
           height: '60px',
           borderRadius: '50%',
-          background: 'linear-gradient(45deg, #D4AF37, #B8860B)',
+          background: `linear-gradient(45deg, ${theme.palette.primary.main}, ${theme.palette.primary.dark})`,
           opacity: 0.2,
           animation: 'float 3s ease-in-out infinite',
           '@keyframes float': {
             '0%, 100%': { transform: 'translateY(0px)' },
             '50%': { transform: 'translateY(-10px)' }
           }
-        }}
+        })}
       />
       
       <Box
-        sx={{
+        sx={(theme) => ({
           position: 'absolute',
           bottom: '30px',
           left: '30px',
           width: '40px',
           height: '40px',
           borderRadius: '50%',
-          background: 'linear-gradient(45deg, #2E7D32, #4CAF50)',
+          background: `linear-gradient(45deg, ${theme.palette.secondary.main}, ${theme.palette.secondary.light})`,
           opacity: 0.3,
           animation: 'float 2s ease-in-out infinite reverse',
-        }}
+        })}
       />
 
       {/* Company Logo */}
@@ -191,11 +194,11 @@ const Login = () => {
         }}
       >
         <Box
-          sx={{
+          sx={(theme) => ({
             width: '140px',
             height: '140px',
             borderRadius: '50%',
-            background: 'linear-gradient(135deg, #D4AF37 0%, #B8860B 100%)',
+            background: `linear-gradient(135deg, ${theme.palette.primary.main} 0%, ${theme.palette.primary.dark} 100%)`,
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -213,11 +216,11 @@ const Login = () => {
               background: 'rgba(255, 255, 255, 0.2)',
               border: '2px solid rgba(255, 255, 255, 0.3)',
             }
-          }}
+          })}
         >
           <img
-            src="/logo-nasmat-jamal.svg"
-            alt="Nasmat Jamal Logo"
+            src={Logo}
+            alt="Key4Market Logo"
             style={{
               width: '80px',
               height: '100px',
@@ -230,16 +233,16 @@ const Login = () => {
         
         <Typography 
           variant="h3" 
-          sx={{ 
+          sx={(theme) => ({ 
             fontWeight: 'bold',
-            background: 'linear-gradient(45deg, #D4AF37, #B8860B)',
+            background: `linear-gradient(45deg, ${theme.palette.primary.main}, ${theme.palette.primary.dark})`,
             backgroundClip: 'text',
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent',
             textAlign: 'center',
             fontFamily: '"Tajawal", "Roboto", sans-serif',
             mb: 1
-          }}
+          })}
         >
           كي فورماركت
         </Typography>
@@ -247,7 +250,7 @@ const Login = () => {
         <Typography 
           variant="h6" 
           sx={{ 
-            color: '#2E7D32',
+            color: 'secondary.main',
             textAlign: 'center',
             fontWeight: 500,
             fontFamily: '"Tajawal", "Roboto", sans-serif'
@@ -263,7 +266,7 @@ const Login = () => {
         sx={{ 
           mb: 1,
           fontWeight: 'bold',
-          color: '#2E7D32',
+          color: 'secondary.main',
           textAlign: 'center',
           position: 'relative',
           zIndex: 1,
@@ -331,7 +334,7 @@ const Login = () => {
           value={formData.username}
           onChange={handleChange}
           disabled={loading}
-          sx={{
+          sx={(theme) => ({
             mb: 2,
             '& .MuiOutlinedInput-root': {
               borderRadius: '12px',
@@ -341,11 +344,11 @@ const Login = () => {
               transition: 'all 0.3s ease',
               '&:hover': {
                 backgroundColor: 'rgba(255, 255, 255, 0.95)',
-                border: '2px solid rgba(212, 175, 55, 0.3)',
+                border: `2px solid ${theme.palette.primary.main}30`,
               },
               '&.Mui-focused': {
                 backgroundColor: 'rgba(255, 255, 255, 1)',
-                border: '2px solid #D4AF37',
+                border: `2px solid ${theme.palette.primary.main}`,
                 boxShadow: '0 0 0 4px rgba(212, 175, 55, 0.1)',
               }
             },
@@ -353,10 +356,10 @@ const Login = () => {
               color: '#666',
               fontFamily: '"Tajawal", "Roboto", sans-serif',
               '&.Mui-focused': {
-                color: '#D4AF37',
+                color: 'primary.main',
               }
             }
-          }}
+          })}
         />
         <TextField
           margin="normal"
@@ -370,7 +373,7 @@ const Login = () => {
           value={formData.password}
           onChange={handleChange}
           disabled={loading}
-          sx={{
+          sx={(theme) => ({
             mb: 2,
             '& .MuiOutlinedInput-root': {
               borderRadius: '12px',
@@ -380,11 +383,11 @@ const Login = () => {
               transition: 'all 0.3s ease',
               '&:hover': {
                 backgroundColor: 'rgba(255, 255, 255, 0.95)',
-                border: '2px solid rgba(212, 175, 55, 0.3)',
+                border: `2px solid ${theme.palette.primary.main}30`,
               },
               '&.Mui-focused': {
                 backgroundColor: 'rgba(255, 255, 255, 1)',
-                border: '2px solid #D4AF37',
+                border: `2px solid ${theme.palette.primary.main}`,
                 boxShadow: '0 0 0 4px rgba(212, 175, 55, 0.1)',
               }
             },
@@ -392,10 +395,10 @@ const Login = () => {
               color: '#666',
               fontFamily: '"Tajawal", "Roboto", sans-serif',
               '&.Mui-focused': {
-                color: '#D4AF37',
+                color: 'primary.main',
               }
             }
-          }}
+          })}
           InputProps={{
             endAdornment: (
               <InputAdornment position="end">
@@ -404,7 +407,7 @@ const Login = () => {
                   onClick={handleClickShowPassword}
                   edge="end"
                   sx={{
-                    color: '#D4AF37',
+                    color: 'primary.main',
                     '&:hover': {
                       backgroundColor: 'rgba(212, 175, 55, 0.1)',
                     }
@@ -424,9 +427,9 @@ const Login = () => {
               onChange={handleChange}
               disabled={loading}
               sx={{
-                color: '#D4AF37',
+                color: 'primary.main',
                 '&.Mui-checked': {
-                  color: '#D4AF37',
+                  color: 'primary.main',
                 },
                 '&:hover': {
                   backgroundColor: 'rgba(212, 175, 55, 0.1)',
@@ -451,12 +454,12 @@ const Login = () => {
           fullWidth
           variant="contained"
           disabled={loading}
-          sx={{ 
+          sx={(theme) => ({ 
             mt: 2, 
             mb: 3,
             py: 1.5,
             borderRadius: '12px',
-            background: 'linear-gradient(135deg, #D4AF37 0%, #B8860B 100%)',
+            background: `linear-gradient(135deg, ${theme.palette.primary.main} 0%, ${theme.palette.primary.dark} 100%)`,
             boxShadow: '0 8px 32px rgba(212, 175, 55, 0.3)',
             fontSize: '1.1rem',
             fontWeight: 'bold',
@@ -464,7 +467,7 @@ const Login = () => {
             textTransform: 'none',
             transition: 'all 0.3s ease',
             '&:hover': {
-              background: 'linear-gradient(135deg, #B8860B 0%, #D4AF37 100%)',
+              background: `linear-gradient(135deg, ${theme.palette.primary.dark} 0%, ${theme.palette.primary.main} 100%)`,
               boxShadow: '0 12px 40px rgba(212, 175, 55, 0.4)',
               transform: 'translateY(-2px)',
             },
@@ -475,7 +478,7 @@ const Login = () => {
               background: 'rgba(212, 175, 55, 0.3)',
               boxShadow: 'none',
             }
-          }}
+          })}
         >
           {loading ? (
             <CircularProgress 
@@ -495,13 +498,13 @@ const Login = () => {
               to="/forgot-password" 
               variant="body2"
               sx={{
-                color: '#2E7D32',
+                color: 'secondary.main',
                 textDecoration: 'none',
                 fontFamily: '"Tajawal", "Roboto", sans-serif',
                 fontWeight: 500,
                 transition: 'all 0.3s ease',
                 '&:hover': {
-                  color: '#D4AF37',
+                  color: 'primary.main',
                   textDecoration: 'underline',
                 }
               }}
