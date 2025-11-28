@@ -143,14 +143,14 @@ const App = () => {
   // Create theme based on theme mode and language
   const theme = React.useMemo(() => {
     const isRTL = currentLanguage && currentLanguage.startsWith('ar');
-    const primaryMain = process.env.REACT_APP_PRIMARY_COLOR || '#D4AF37';
+    const primaryMain = process.env.REACT_APP_PRIMARY_COLOR || '#E2B842';
     const primaryLight = process.env.REACT_APP_PRIMARY_LIGHT || '#F4E4BC';
     const primaryDark = process.env.REACT_APP_PRIMARY_DARK || '#B8860B';
-    const secondaryMain = process.env.REACT_APP_SECONDARY_COLOR || '#2E7D32';
+    const secondaryMain = process.env.REACT_APP_SECONDARY_COLOR || '#386641';
     const secondaryLight = process.env.REACT_APP_SECONDARY_LIGHT || '#4CAF50';
     const secondaryDark = process.env.REACT_APP_SECONDARY_DARK || '#1B5E20';
-    const bgDefault = process.env.REACT_APP_BG_DEFAULT || (themeMode === 'dark' ? '#121212' : '#FAFAFA');
-    const bgPaper = process.env.REACT_APP_BG_PAPER || (themeMode === 'dark' ? '#1E1E1E' : '#FFFFFF');
+    const bgDefault = process.env.REACT_APP_BG_DEFAULT || (themeMode === 'dark' ? '#121212' : '#E5E5E5');
+    const bgPaper = process.env.REACT_APP_BG_PAPER || (themeMode === 'dark' ? '#1E1E1E' : '#F5F5F5');
     return createTheme({
       direction: isRTL ? 'rtl' : 'ltr', // RTL for Arabic, LTR for other languages
       palette: {

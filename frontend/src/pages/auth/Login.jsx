@@ -37,8 +37,7 @@ const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const theme = useTheme();
-  const bgUrl = process.env.REACT_APP_LOGIN_BG_URL || '/assets/Capture1.PNG';
-  const sideUrl = process.env.REACT_APP_LOGIN_SIDE_URL || '/assets/Capture1.PNG';
+
   
   const [formData, setFormData] = useState({
     username: '',
@@ -147,170 +146,11 @@ const Login = () => {
         }
       }}
     >
-      <Box
-        sx={{
-          position: 'absolute',
-          inset: 0,
-          backgroundImage: `url(${bgUrl})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          filter: 'blur(6px)',
-          opacity: 0.22,
-          zIndex: 0,
-        }}
-      />
-      <Box
-        sx={{
-          position: 'absolute',
-          top: 0,
-          right: 0,
-          bottom: 0,
-          width: { xs: '0%', md: '42%' },
-          backgroundImage: `url(${sideUrl})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          opacity: 0.4,
-          filter: 'saturate(1.1) contrast(1.1)',
-          mixBlendMode: 'multiply',
-          borderTopRightRadius: '20px',
-          borderBottomRightRadius: '20px',
-          zIndex: 0,
-        }}
-      />
-      {/* Decorative Elements */}
-      <Box
-        sx={(theme) => ({
-          position: 'absolute',
-          top: '20px',
-          right: '20px',
-          width: '60px',
-          height: '60px',
-          borderRadius: '50%',
-          background: `linear-gradient(45deg, ${theme.palette.primary.main}, ${theme.palette.primary.dark})`,
-          opacity: 0.2,
-          animation: 'float 3s ease-in-out infinite',
-          '@keyframes float': {
-            '0%, 100%': { transform: 'translateY(0px)' },
-            '50%': { transform: 'translateY(-10px)' }
-          }
-        })}
-      />
-      
-      <Box
-        sx={(theme) => ({
-          position: 'absolute',
-          bottom: '30px',
-          left: '30px',
-          width: '40px',
-          height: '40px',
-          borderRadius: '50%',
-          background: `linear-gradient(45deg, ${theme.palette.secondary.main}, ${theme.palette.secondary.light})`,
-          opacity: 0.3,
-          animation: 'float 2s ease-in-out infinite reverse',
-        })}
-      />
-
-      {/* Company Logo */}
-      <Box
-        sx={{
-          mb: 4,
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          position: 'relative',
-          zIndex: 1,
-          animation: 'fadeInUp 1s ease-in-out',
-          '@keyframes fadeInUp': {
-            '0%': { opacity: 0, transform: 'translateY(30px)' },
-            '100%': { opacity: 1, transform: 'translateY(0)' }
-          }
-        }}
-      >
-        <Box
-          sx={(theme) => ({
-            width: '140px',
-            height: '140px',
-            borderRadius: '50%',
-            background: `linear-gradient(135deg, ${theme.palette.primary.main} 0%, ${theme.palette.primary.dark} 100%)`,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            mb: 2,
-            boxShadow: '0 10px 36px rgba(0,0,0,0.15)',
-            position: 'relative',
-            '&::before': {
-              content: '""',
-              position: 'absolute',
-              top: '10px',
-              left: '10px',
-              right: '10px',
-              bottom: '10px',
-              borderRadius: '50%',
-              background: 'rgba(255, 255, 255, 0.18)',
-              border: '2px solid rgba(255, 255, 255, 0.28)',
-            }
-          })}
-        >
-          <VpnKeyRounded sx={{ fontSize: 68, color: '#fff' }} />
-        </Box>
-        
-        <Typography 
-          variant="h3" 
-          sx={(theme) => ({ 
-            fontWeight: 'bold',
-            background: `linear-gradient(45deg, ${theme.palette.primary.main}, ${theme.palette.primary.dark})`,
-            backgroundClip: 'text',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            textAlign: 'center',
-            fontFamily: '"Tajawal", "Roboto", sans-serif',
-            mb: 1
-          })}
-        >
-          كي فورماركت
-        </Typography>
-        
-        <Typography 
-          variant="h6" 
-          sx={{ 
-            color: 'secondary.main',
-            textAlign: 'center',
-            fontWeight: 500,
-            fontFamily: '"Tajawal", "Roboto", sans-serif'
-          }}
-        >
-          KEY4MARKET
-        </Typography>
-      </Box>
-      
-      <Typography 
-        component="h1" 
-        variant="h4" 
-        sx={{ 
-          mb: 1,
-          fontWeight: 'bold',
-          color: 'secondary.main',
-          textAlign: 'center',
-          position: 'relative',
-          zIndex: 1,
-          fontFamily: '"Tajawal", "Roboto", sans-serif'
-        }}
-      >
+      <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+        <LockOutlinedIcon />
+      </Avatar>
+      <Typography component="h1" variant="h5">
         {t('login')}
-      </Typography>
-      
-      <Typography 
-        variant="body1" 
-        sx={{ 
-          mb: 4,
-          color: '#666',
-          textAlign: 'center',
-          position: 'relative',
-          zIndex: 1,
-          fontFamily: '"Tajawal", "Roboto", sans-serif'
-        }}
-      >
-        مرحباً بك في نظام إدارة المتجر
       </Typography>
       
       {error && (
@@ -477,42 +317,9 @@ const Login = () => {
           fullWidth
           variant="contained"
           disabled={loading}
-          sx={(theme) => ({ 
-            mt: 2, 
-            mb: 3,
-            py: 1.5,
-            borderRadius: '12px',
-            background: `linear-gradient(135deg, ${theme.palette.primary.main} 0%, ${theme.palette.primary.dark} 100%)`,
-            boxShadow: '0 8px 32px rgba(212, 175, 55, 0.3)',
-            fontSize: '1.1rem',
-            fontWeight: 'bold',
-            fontFamily: '"Tajawal", "Roboto", sans-serif',
-            textTransform: 'none',
-            transition: 'all 0.3s ease',
-            '&:hover': {
-              background: `linear-gradient(135deg, ${theme.palette.primary.dark} 0%, ${theme.palette.primary.main} 100%)`,
-              boxShadow: '0 12px 40px rgba(212, 175, 55, 0.4)',
-              transform: 'translateY(-2px)',
-            },
-            '&:active': {
-              transform: 'translateY(0px)',
-            },
-            '&:disabled': {
-              background: 'rgba(212, 175, 55, 0.3)',
-              boxShadow: 'none',
-            }
-          })}
+          sx={{ mt: 3, mb: 2 }}
         >
-          {loading ? (
-            <CircularProgress 
-              size={24} 
-              sx={{ 
-                color: 'white',
-                mr: 1 
-              }} 
-            />
-          ) : null}
-          {loading ? 'جاري تسجيل الدخول...' : t('signIn')}
+          {loading ? <CircularProgress size={24} /> : t('signIn')}
         </Button>
         <Grid container justifyContent="center">
           <Grid item>
