@@ -23,6 +23,7 @@ import {
   LockOutlined as LockOutlinedIcon,
   Visibility,
   VisibilityOff,
+  VpnKeyRounded,
 } from '@mui/icons-material';
 import { useEffect } from 'react';
 import Logo from '../../assets/logo/logo-nasmat-jamal.svg';
@@ -36,7 +37,8 @@ const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const theme = useTheme();
-  const bgUrl = process.env.REACT_APP_LOGIN_BG_URL || '/assets/Capture1.PNG';
+  const bgUrl = process.env.REACT_APP_LOGIN_BG_URL || '/assets/Capture2.PNG';
+  const sideUrl = process.env.REACT_APP_LOGIN_SIDE_URL || '/assets/Capture2.PNG';
   
   const [formData, setFormData] = useState({
     username: '',
@@ -157,6 +159,24 @@ const Login = () => {
           zIndex: 0,
         }}
       />
+      <Box
+        sx={{
+          position: 'absolute',
+          top: 0,
+          right: 0,
+          bottom: 0,
+          width: { xs: '0%', md: '42%' },
+          backgroundImage: `url(${sideUrl})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          opacity: 0.35,
+          filter: 'saturate(1.05) contrast(1.05)',
+          mixBlendMode: 'multiply',
+          borderTopRightRadius: '20px',
+          borderBottomRightRadius: '20px',
+          zIndex: 0,
+        }}
+      />
       {/* Decorative Elements */}
       <Box
         sx={(theme) => ({
@@ -231,17 +251,7 @@ const Login = () => {
             }
           })}
         >
-          <img
-            src={Logo}
-            alt="Key4Market Logo"
-            style={{
-              width: '80px',
-              height: '100px',
-              filter: 'brightness(0) invert(1)',
-              zIndex: 1,
-              position: 'relative'
-            }}
-          />
+          <VpnKeyRounded sx={{ fontSize: 68, color: '#fff' }} />
         </Box>
         
         <Typography 
