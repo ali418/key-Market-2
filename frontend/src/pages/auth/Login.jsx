@@ -38,6 +38,14 @@ const Login = () => {
   const dispatch = useDispatch();
   const theme = useTheme();
 
+  const sanitize = (s) => {
+    if (typeof s !== 'string') return s;
+    return s
+      .normalize('NFKC')
+      .replace(/[\u200B-\u200D\uFEFF\u200E\u200F\u2066-\u2069]/g, '')
+      .trim();
+  };
+
   
   const [formData, setFormData] = useState({
     username: '',
@@ -56,9 +64,10 @@ const Login = () => {
   
   const handleChange = (e) => {
     const { name, value, checked } = e.target;
+    const v = name === 'rememberMe' ? checked : sanitize(value);
     setFormData({
       ...formData,
-      [name]: name === 'rememberMe' ? checked : value,
+      [name]: v,
     });
   };
   
@@ -74,8 +83,8 @@ const Login = () => {
     try {
       // Real API login
       const { token, refreshToken, user } = await apiService.login(
-        formData.username,
-        formData.password
+        sanitize(formData.username),
+        sanitize(formData.password)
       );
 
       // Persist auth data
@@ -196,6 +205,11 @@ const Login = () => {
           autoFocus
           value={formData.username}
           onChange={handleChange}
+          onPaste={(e) => {
+            e.preventDefault();
+            const text = e.clipboardData.getData('text');
+            setFormData((prev) => ({ ...prev, username: sanitize(text) }));
+          }}
           disabled={loading}
           sx={(theme) => ({
             mb: 2,
@@ -235,6 +249,11 @@ const Login = () => {
           autoComplete="current-password"
           value={formData.password}
           onChange={handleChange}
+          onPaste={(e) => {
+            e.preventDefault();
+            const text = e.clipboardData.getData('text');
+            setFormData((prev) => ({ ...prev, password: sanitize(text) }));
+          }}
           disabled={loading}
           sx={(theme) => ({
             mb: 2,
