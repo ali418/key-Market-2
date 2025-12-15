@@ -65,7 +65,7 @@ i18n
     // eslint-disable-next-line no-undef
     debug: process.env.NODE_ENV === 'development',
     // Namespace for translations
-    ns: ['common', 'auth', 'dashboard', 'products', 'sales', 'customers', 'inventory', 'reports', 'notFound', 'profile'],
+    ns: ['common', 'auth', 'dashboard', 'products', 'sales', 'customers', 'inventory', 'reports', 'notFound', 'profile', 'users'],
     defaultNS: 'common',
 
     // ✨ الإضافة المهمة: تحميل اللغات مسبقًا
@@ -125,7 +125,7 @@ i18n.store.on('failed', (lng, ns, msg) => {
 
 // Helper function to manually reload all namespaces
 export const reloadAllTranslations = (language) => {
-  const namespaces = ['common', 'auth', 'dashboard', 'products', 'sales', 'customers', 'inventory', 'reports', 'notFound', 'profile'];
+  const namespaces = ['common', 'auth', 'dashboard', 'products', 'sales', 'customers', 'inventory', 'reports', 'notFound', 'profile', 'users'];
   const currentLang = language || i18n.language;
   console.log(`Manually reloading all namespaces for language: ${currentLang}`);
 

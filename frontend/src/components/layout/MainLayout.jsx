@@ -151,7 +151,7 @@ const MainContent = styled(Box, {
 
 const MainLayout = () => {
   const theme = useTheme();
-  const { t, i18n } = useTranslation(['common', 'dashboard', 'products', 'sales', 'customers', 'inventory', 'reports']);
+  const { t, i18n } = useTranslation(['common', 'dashboard', 'products', 'sales', 'customers', 'inventory', 'reports', 'users']);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
@@ -338,8 +338,8 @@ const MainLayout = () => {
     { text: t('reports:reports'), icon: <BarChartIcon />, path: '/reports' },
     { text: t('settings'), icon: <SettingsIcon />, path: '/settings' },
     // Online features
-    { text: 'الطلبات الأونلاين', icon: <ShoppingCartIcon />, path: '/online-orders' },
-    { text: 'إدارة المنتجات الأونلاين', icon: <InventoryIcon />, path: '/online-products' },
+    { text: t('common:onlineOrders'), icon: <ShoppingCartIcon />, path: '/online-orders' },
+    { text: t('common:onlineProducts'), icon: <InventoryIcon />, path: '/online-products' },
   ];
 
   const menuItems = allMenuItems.filter(item => {
