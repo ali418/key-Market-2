@@ -42,7 +42,7 @@ const Cart = () => {
               <Stack spacing={2}>
                 {items.map((i) => (
                   <Box key={i.id} sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-                    <img src={i.image_url || placeholderSrc} alt={i.name} style={{ width: 100, height: 100, objectFit: 'cover', borderRadius: 12 }} onError={(e) => { e.currentTarget.src = placeholderSrc; }} />
+                    <img src={i.image_url || placeholderSrc} alt={i.name} loading='lazy' decoding='async' style={{ width: 100, height: 100, objectFit: 'cover', borderRadius: 12 }} onError={(e) => { e.currentTarget.src = placeholderSrc; }} />
                     <Box sx={{ flexGrow: 1 }}>
                       <Typography sx={{ fontWeight: 800 }}>{i.name}</Typography>
                       <Typography color="text.secondary">{i.price.toFixed(2)} AED</Typography>

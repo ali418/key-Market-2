@@ -1,4 +1,5 @@
 import { Suspense } from 'react';
+import { CircularProgress } from '@mui/material';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
@@ -18,7 +19,7 @@ root.render(
   // Removed React.StrictMode to avoid double-invocation of effects in development
   <Provider store={store}>
     <BrowserRouter>
-      <Suspense fallback={<div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>جاري تحميل الترجمات...</div>}>
+      <Suspense fallback={<div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}><CircularProgress /></div>}>
         <App />
       </Suspense>
     </BrowserRouter>

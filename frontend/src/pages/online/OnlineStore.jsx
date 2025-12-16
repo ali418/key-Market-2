@@ -160,6 +160,7 @@ const OnlineStore = () => {
             onError={(e) => { e.currentTarget.src = placeholderSrc; }}
             alt={item?.name || item?.name_ar || 'Product'}
             sx={{ objectFit: 'cover' }}
+            loading='lazy'
           />
           <Box sx={{ position: 'absolute', inset: 0, bgcolor: 'rgba(0,0,0,0.05)', opacity: 0, transition: 'opacity 0.2s ease', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 1, '&:hover': { opacity: 1 } }}>
             <Button variant='contained' color='primary' size='small' onClick={() => addToCart(item)}>إضافة للسلة</Button>
@@ -191,7 +192,7 @@ const OnlineStore = () => {
         <Container maxWidth='lg'>
           <Toolbar disableGutters sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-              <img src={brandLogo} alt='Nasmat Jamal' onError={(e) => { e.currentTarget.src = placeholderSrc; }} style={{ width: 40, height: 40, objectFit: 'contain' }} />
+              <img src={brandLogo} alt='Nasmat Jamal' loading='lazy' decoding='async' onError={(e) => { e.currentTarget.src = placeholderSrc; }} style={{ width: 40, height: 40, objectFit: 'contain' }} />
               <Typography variant='h6' sx={{ fontWeight: 800 }}>نسمة جمال</Typography>
             </Box>
             <Box sx={{ flexGrow: 1 }} />
@@ -240,7 +241,7 @@ const OnlineStore = () => {
             </Grid>
             <Grid item xs={12} md={6}>
               <Paper sx={{ height: 260, borderRadius: 2, overflow: 'hidden', border: '1px solid #C9A227' }}>
-                <img src={placeholderSrc} alt='Hero' style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                <img src={placeholderSrc} alt='Hero' loading='lazy' decoding='async' style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
               </Paper>
             </Grid>
           </Grid>
@@ -256,7 +257,7 @@ const OnlineStore = () => {
               <Grid item xs={12} sm={6} md={4} key={cat.key}>
                 <Card sx={{ borderRadius: 2 }}>
                   <CardActionArea onClick={() => setCategory(cat.key)}>
-                    <CardMedia component='img' height='160' image={cat.img} alt={cat.title} />
+                    <CardMedia component='img' height='160' image={cat.img} alt={cat.title} loading='lazy' />
                     <CardContent>
                       <Typography variant='subtitle1' sx={{ fontWeight: 700 }}>{cat.title}</Typography>
                     </CardContent>
@@ -464,7 +465,7 @@ const OnlineStore = () => {
         <DialogContent>
           <Grid container spacing={3}>
             <Grid item xs={12} md={6}>
-              <CardMedia component='img' height='300' image={getImageSrc(selectedProduct?.image_url)} onError={(e) => { e.currentTarget.src = placeholderSrc; }} sx={{ objectFit: 'cover', borderRadius: 2 }} />
+              <CardMedia component='img' height='300' image={getImageSrc(selectedProduct?.image_url)} onError={(e) => { e.currentTarget.src = placeholderSrc; }} sx={{ objectFit: 'cover', borderRadius: 2 }} loading='lazy' />
             </Grid>
             <Grid item xs={12} md={6}>
               <Typography variant='h6' sx={{ color: '#C9A227', fontWeight: 800, mb: 1 }}>

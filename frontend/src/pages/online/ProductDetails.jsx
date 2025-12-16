@@ -86,12 +86,12 @@ const ProductDetails = () => {
         <Grid item xs={12} md={6}>
           <Paper sx={{ p: 2, borderRadius: 2, border: '1px solid #eee' }}>
             <Box sx={{ height: 420, borderRadius: 2, overflow: 'hidden', border: '1px solid #C9A227' }}>
-              <img src={getImageSrc(product?.image_url)} alt={product?.name || product?.name_ar || 'Product'} style={{ width: '100%', height: '100%', objectFit: 'cover' }} onError={(e) => { e.currentTarget.src = placeholderSrc; }} />
+              <img src={getImageSrc(product?.image_url)} alt={product?.name || product?.name_ar || 'Product'} loading='lazy' decoding='async' style={{ width: '100%', height: '100%', objectFit: 'cover' }} onError={(e) => { e.currentTarget.src = placeholderSrc; }} />
             </Box>
             <Box sx={{ display: 'flex', gap: 1, mt: 2 }}>
               {[product?.image_url, product?.image2, product?.image3].filter(Boolean).slice(0, 3).map((img, idx) => (
                 <Box key={idx} sx={{ width: 80, height: 80, border: '1px solid #eee', borderRadius: 2, overflow: 'hidden' }}>
-                  <img src={getImageSrc(img)} alt="thumb" style={{ width: '100%', height: '100%', objectFit: 'cover' }} onError={(e) => { e.currentTarget.src = placeholderSrc; }} />
+                  <img src={getImageSrc(img)} alt="thumb" loading='lazy' decoding='async' style={{ width: '100%', height: '100%', objectFit: 'cover' }} onError={(e) => { e.currentTarget.src = placeholderSrc; }} />
                 </Box>
               ))}
             </Box>
@@ -132,7 +132,7 @@ const ProductDetails = () => {
           {related.slice(0, 3).map((it, idx) => (
             <Grid item xs={12} md={4} key={idx}>
               <Card sx={{ borderRadius: 2, overflow: 'hidden', border: '1px solid #eee', transition: 'transform 0.2s ease, box-shadow 0.2s ease', '&:hover': { transform: 'translateY(-2px)', boxShadow: 6 } }}>
-                <CardMedia component="img" height="180" image={getImageSrc(it?.image_url)} />
+                <CardMedia component="img" height="180" image={getImageSrc(it?.image_url)} loading="lazy" />
                 <CardContent>
                   <Typography noWrap sx={{ fontWeight: 700 }}>{it?.name || it?.name_ar || 'منتج'}</Typography>
                 </CardContent>
