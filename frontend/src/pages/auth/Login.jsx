@@ -179,13 +179,13 @@ const Login = () => {
         }}
       >
         <Typography variant="subtitle2" sx={{ fontWeight: 'bold', mb: 0.5 }}>
-          بيانات الدخول التجريبية:
+          Demo Credentials:
         </Typography>
         <Typography variant="body2" sx={{ fontFamily: 'monospace' }}>
-          المستخدم: Admin
+          User: admin
         </Typography>
         <Typography variant="body2" sx={{ fontFamily: 'monospace' }}>
-          كلمة المرور: Keyforit12
+          Password: Keyforit12
         </Typography>
       </Alert>
       
