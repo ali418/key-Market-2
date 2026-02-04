@@ -161,6 +161,33 @@ const Login = () => {
       <Typography component="h1" variant="h5">
         {t('login')}
       </Typography>
+
+      {/* Demo Credentials Hint */}
+      <Alert 
+        severity="info" 
+        sx={{ 
+          mt: 2, 
+          width: '100%',
+          position: 'relative',
+          zIndex: 1,
+          borderRadius: '12px',
+          backgroundColor: 'rgba(33, 150, 243, 0.1)',
+          border: '1px solid rgba(33, 150, 243, 0.3)',
+          '& .MuiAlert-icon': {
+            color: '#1976d2'
+          }
+        }}
+      >
+        <Typography variant="subtitle2" sx={{ fontWeight: 'bold', mb: 0.5 }}>
+          بيانات الدخول التجريبية:
+        </Typography>
+        <Typography variant="body2" sx={{ fontFamily: 'monospace' }}>
+          المستخدم: Admin
+        </Typography>
+        <Typography variant="body2" sx={{ fontFamily: 'monospace' }}>
+          كلمة المرور: Keyforit12
+        </Typography>
+      </Alert>
       
       {error && (
         <Alert 
