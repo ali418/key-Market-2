@@ -157,6 +157,13 @@ ul {
     text-align: center;
 }
 
+.hero-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 15px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+}
+
 .img-placeholder {
     width: 100%;
     height: 350px;
