@@ -197,6 +197,9 @@ app.use('*/static/js', (req, res, next) => {
   res.redirect(correctPath);
 });
 
+// Serve marketing page
+app.use('/marketing', express.static(path.join(__dirname, '../../marketing_page')));
+
 // Handle React routing, return all requests to React app
 app.get('*', (req, res) => {
   // Exclude API routes from this handler
