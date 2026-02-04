@@ -20,8 +20,8 @@ body {
     line-height: 1.6;
     color: var(--text-color);
     background-color: var(--white);
-    direction: rtl;
-    text-align: right;
+    direction: ltr;
+    text-align: left;
 }
 
 .container {
