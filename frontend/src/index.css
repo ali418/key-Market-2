@@ -6,6 +6,41 @@
   padding: 0;
 }
 
+/* 
+   --------------------------------------------------------------------------
+   Mobile Sidebar Logic (The "Secret Mix")
+   --------------------------------------------------------------------------
+   This handles the sidebar behavior on mobile devices:
+   1. It's fixed positioned (overlays content)
+   2. Hidden by default (left: -100%)
+   3. Slides in when active (left: 0)
+   4. High z-index to appear on top
+*/
+@media (max-width: 768px) {
+  .sidebar {
+    position: fixed !important;
+    top: 0;
+    bottom: 0;
+    width: 240px; /* Adjust based on drawerWidth */
+    left: -100% !important; /* Hidden off-screen */
+    z-index: 1200; /* High z-index */
+    transition: all 0.3s ease; /* Smooth transition */
+    height: 100vh;
+    background-color: #fff; /* Ensure background */
+    box-shadow: 2px 0 8px rgba(0,0,0,0.1);
+  }
+  
+  .sidebar.active {
+    left: 0 !important; /* Show on screen */
+  }
+  
+  /* 
+     If we want the sidebar to ALWAYS be on the left (even in RTL), 
+     we rely on 'left' property. 
+     If we wanted it to flip, we would use 'inset-inline-start'.
+  */
+}
+
 /* Professional A4 Invoice Print Styles */
 @media print {
   /* Reset all margins and paddings for print */
@@ -300,6 +335,7 @@ body, html, #root {
     padding: 0 !important;
     height: auto !important;
     overflow: visible !important;
+    position: absolute;
   }
 
   @page { 

@@ -300,7 +300,8 @@ const MainLayout = () => {
 
   // Grid layout for sidebar positioned properly in both LTR and RTL
   const collapsedWidth = `calc(${theme.spacing(6)} + 1px)`;
-  const drawerColWidth = open ? `${drawerWidth}px` : (isMobile ? '0px' : collapsedWidth);
+  // On mobile, the drawer column should be 0 because the drawer is fixed/overlay
+  const drawerColWidth = isMobile ? '0px' : (open ? `${drawerWidth}px` : collapsedWidth);
   // Keep drawer on left for both RTL and LTR as per user request
   const gridTemplateColumns = `${drawerColWidth} 1fr`;
   const gridTemplateAreas = "'drawer content'";
@@ -362,7 +363,24 @@ const MainLayout = () => {
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.enteringScreen,
       }),
-    }}>
+    }}
+    >
+      {/* Mobile Backdrop */}
+      {isMobile && open && (
+        <Box
+          sx={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundColor: 'rgba(0,0,0,0.5)',
+            zIndex: 1199, // Just below sidebar (1200)
+          }}
+          onClick={handleDrawerClose}
+        />
+      )}
+
       <AppBarStyled position='fixed' open={open} isRTL={isRTL} sx={{ gridColumn: '1 / -1' }}>
         <Toolbar>
           <IconButton
@@ -515,7 +533,21 @@ const MainLayout = () => {
           </Box>
         </Toolbar>
       </AppBarStyled>
-      <DrawerStyled variant='permanent' anchor='left' open={open} sx={{ gridArea: 'drawer', '& .MuiDrawer-paper': { height: '100%', boxSizing: 'border-box' } }}>
+      <DrawerStyled 
+        variant='permanent' 
+        anchor='left' 
+        open={open} 
+        className={isMobile ? (open ? 'sidebar active' : 'sidebar') : ''}
+        sx={{ 
+          gridArea: 'drawer', 
+          '& .MuiDrawer-paper': { 
+            height: '100%', 
+            boxSizing: 'border-box',
+            // Ensure transparent background for the drawer container so CSS class bg takes effect if needed,
+            // though MuiDrawer-paper usually handles bg.
+          } 
+        }}
+      >
         <DrawerHeader>
           <IconButton onClick={handleDrawerClose}>
             {isRTL ? <ChevronRightIcon /> : <ChevronLeftIcon />}
