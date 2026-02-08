@@ -34,6 +34,14 @@
     left: 0 !important; /* Show on screen */
   }
   
+  /* Ensure the inner paper scrolls on mobile */
+  .sidebar .MuiDrawer-paper {
+    height: 100% !important;
+    overflow-y: auto !important;
+    /* Ensure content is accessible */
+    pointer-events: auto !important;
+  }
+  
   /* 
      If we want the sidebar to ALWAYS be on the left (even in RTL), 
      we rely on 'left' property. 
