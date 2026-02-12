@@ -24,6 +24,7 @@ import {
   Visibility,
   VisibilityOff,
   VpnKeyRounded,
+  Key as KeyIcon,
 } from '@mui/icons-material';
 import { useEffect } from 'react';
 import Logo from '../../assets/logo/logo-nasmat-jamal.svg';
@@ -163,31 +164,47 @@ const Login = () => {
       </Typography>
 
       {/* Demo Credentials Hint */}
-      <Alert 
-        severity="info" 
+      <Box 
+        onClick={() => setFormData({ ...formData, username: 'admin', password: 'Keyforit12' })} 
         sx={{ 
-          mt: 2, 
+          mt: 2,
+          mb: 3, 
+          p: 2, 
           width: '100%',
+          borderRadius: 2, 
+          bgcolor: 'rgba(33, 150, 243, 0.1)', 
+          border: '1px solid rgba(33, 150, 243, 0.3)', 
+          cursor: 'pointer', 
+          display: 'flex', 
+          alignItems: 'center', 
+          gap: 2, 
           position: 'relative',
           zIndex: 1,
-          borderRadius: '12px',
-          backgroundColor: 'rgba(33, 150, 243, 0.1)',
-          border: '1px solid rgba(33, 150, 243, 0.3)',
-          '& .MuiAlert-icon': {
-            color: '#1976d2'
-          }
-        }}
-      >
-        <Typography variant="subtitle2" sx={{ fontWeight: 'bold', mb: 0.5 }}>
-          Demo Credentials:
-        </Typography>
-        <Typography variant="body2" sx={{ fontFamily: 'monospace' }}>
-          User: admin
-        </Typography>
-        <Typography variant="body2" sx={{ fontFamily: 'monospace' }}>
-          Password: Keyforit12
-        </Typography>
-      </Alert>
+          transition: 'all 0.2s', 
+          '&:hover': { 
+            bgcolor: 'rgba(33, 150, 243, 0.2)', 
+            transform: 'translateY(-2px)' 
+          } 
+        }} 
+      > 
+        <Box sx={{ 
+          p: 1, 
+          borderRadius: '50%', 
+          bgcolor: 'rgba(33, 150, 243, 0.2)', 
+          display: 'flex', 
+          color: '#1976d2' 
+        }}> 
+          <KeyIcon fontSize="small" /> 
+        </Box> 
+        <Box> 
+          <Typography variant="subtitle2" sx={{ color: '#1976d2', fontWeight: 'bold' }}> 
+            Demo Account 
+          </Typography> 
+          <Typography variant="caption" sx={{ color: 'text.secondary' }}> 
+            admin / Keyforit12 (Click to fill) 
+          </Typography> 
+        </Box> 
+      </Box>
       
       {error && (
         <Alert 
