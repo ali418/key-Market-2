@@ -9,6 +9,14 @@ const { Op } = require('sequelize');
  */
 exports.getNotifications = async (req, res, next) => {
   try {
+    // Ensure req.user exists before accessing id
+    if (!req.user || !req.user.id) {
+      return res.status(401).json({
+        success: false,
+        message: 'User not authenticated',
+      });
+    }
+
     const userId = req.user.id;
     
     const notifications = await Notification.findAll({
@@ -17,10 +25,7 @@ exports.getNotifications = async (req, res, next) => {
       limit: 50,
     });
     
-    return res.status(200).json({
-      success: true,
-      data: notifications,
-    });
+    return res.status(200).json(notifications);
   } catch (error) {
     next(error);
   }
@@ -34,6 +39,14 @@ exports.getNotifications = async (req, res, next) => {
  */
 exports.getUnreadCount = async (req, res, next) => {
   try {
+    // Ensure req.user exists before accessing id
+    if (!req.user || !req.user.id) {
+      return res.status(401).json({
+        success: false,
+        message: 'User not authenticated',
+      });
+    }
+
     const userId = req.user.id;
     
     const count = await Notification.count({
@@ -43,10 +56,7 @@ exports.getUnreadCount = async (req, res, next) => {
       },
     });
     
-    return res.status(200).json({
-      success: true,
-      data: { count },
-    });
+    return res.status(200).json(count);
   } catch (error) {
     next(error);
   }
@@ -61,6 +71,15 @@ exports.getUnreadCount = async (req, res, next) => {
 exports.markAsRead = async (req, res, next) => {
   try {
     const { id } = req.params;
+    
+    // Ensure req.user exists before accessing id
+    if (!req.user || !req.user.id) {
+      return res.status(401).json({
+        success: false,
+        message: 'User not authenticated',
+      });
+    }
+
     const userId = req.user.id;
     
     const notification = await Notification.findOne({
@@ -79,10 +98,7 @@ exports.markAsRead = async (req, res, next) => {
     
     await notification.update({ isRead: true });
     
-    return res.status(200).json({
-      success: true,
-      data: notification,
-    });
+    return res.status(200).json(notification);
   } catch (error) {
     next(error);
   }
@@ -96,6 +112,14 @@ exports.markAsRead = async (req, res, next) => {
  */
 exports.markAllAsRead = async (req, res, next) => {
   try {
+    // Ensure req.user exists before accessing id
+    if (!req.user || !req.user.id) {
+      return res.status(401).json({
+        success: false,
+        message: 'User not authenticated',
+      });
+    }
+
     const userId = req.user.id;
     
     await Notification.update(
