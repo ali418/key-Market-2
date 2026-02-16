@@ -165,7 +165,7 @@ const Login = () => {
 
       {/* Demo Credentials Hint */}
       <Box 
-        onClick={() => setFormData({ ...formData, username: 'admin', password: 'Keyforit12' })} 
+        onClick={() => setFormData({ ...formData, username: 'admin', password: 'keyforit12' })} 
         sx={{ 
           mt: 2,
           mb: 3, 
@@ -200,8 +200,11 @@ const Login = () => {
           <Typography variant="subtitle2" sx={{ color: '#1976d2', fontWeight: 'bold' }}> 
             Demo Account 
           </Typography> 
-          <Typography variant="caption" sx={{ color: 'text.secondary' }}> 
-            admin / Keyforit12 (Click to fill) 
+          <Typography variant="caption" sx={{ color: 'text.secondary', display: 'block' }}> 
+            admin / keyforit12 
+          </Typography> 
+          <Typography variant="caption" sx={{ color: 'text.secondary', display: 'block' }}> 
+            Click here to auto-fill demo login 
           </Typography> 
         </Box> 
       </Box>
